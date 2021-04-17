@@ -149,21 +149,6 @@ CREATE SCHEMA "Subastas";
 ALTER SCHEMA "Subastas" OWNER TO postgres;
 
 --
--- TOC entry 236 (class 1255 OID 40990)
--- Name: Delelte_Comprador(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
---
-
-CREATE PROCEDURE "Subastas"."Delelte_Comprador"("ID_C" integer)
-    LANGUAGE sql
-    AS $$
-DELETE FROM "Subastas"."Comprador"
-	WHERE "ID_C" = "ID_Participante";
-$$;
-
-
-ALTER PROCEDURE "Subastas"."Delelte_Comprador"("ID_C" integer) OWNER TO postgres;
-
---
 -- TOC entry 213 (class 1255 OID 32783)
 -- Name: Delete_Admin(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
@@ -209,6 +194,66 @@ $$;
 
 
 ALTER PROCEDURE "Subastas"."Delete_Clasificacion"("ID_C" integer) OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1255 OID 40990)
+-- Name: Delelte_Comprador(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Delelte_Comprador"("ID_C" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Comprador"
+	WHERE "ID_C" = "ID_Participante";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delelte_Comprador"("ID_C" integer) OWNER TO postgres;
+
+
+CREATE PROCEDURE "Subastas"."Delete_Participante"("ID_P" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Participante"
+	WHERE "ID_P" = "ID_Participante";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delete_Participante"("ID_P" integer) OWNER TO postgres;
+
+
+CREATE PROCEDURE "Subastas"."Delete_Puja"("ID_P" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Puja"
+	WHERE "ID_P" = "ID_Puja";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delete_Puja"("ID_P" integer) OWNER TO postgres;
+
+
+CREATE PROCEDURE "Subastas"."Delete_Subasta"("ID_S" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Subasta"
+	WHERE "ID_S" = "ID_Subasta";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delete_Subasta"("ID_S" integer) OWNER TO postgres;
+
+
+CREATE PROCEDURE "Subastas"."Delete_Vendedor"("ID_V" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Vendedor"
+	WHERE "ID_V" = "ID_Participante";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delete_Vendedor"("ID_V" integer) OWNER TO postgres;
+
 
 --
 -- TOC entry 232 (class 1255 OID 32798)
@@ -282,6 +327,70 @@ $_$;
 
 ALTER PROCEDURE "Subastas"."Insert_Comprador"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[]) OWNER TO postgres;
 
+-- Participante
+CREATE PROCEDURE "Subastas"."Insert_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[])
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+	INSERT INTO "Subastas"."Participante"(
+	"ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password")
+	VALUES ("ID_P", "CE", "Nom", "New_Alias", "Tel", "FK_A", "New_Password");
+END IF;
+END $$
+$_$;
+
+
+ALTER PROCEDURE "Subastas"."Insert_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[]) OWNER TO postgres;
+
+
+-- Puja
+CREATE PROCEDURE "Subastas"."Insert_Puja"("ID_P" integer, "Ofrecido" numeric, "fecha" date, "FK_S" integer, "FK_C" integer)
+    LANGUAGE sql
+    AS $$
+INSERT INTO "Subastas"."Puja"(
+	"ID_Puja", "Ofrecido", "Fecha", "ForeignKey_Subasta", "ForeignKey_Comprador")
+	VALUES ("ID_P", "Ofrecido", "fecha", "FK_S", "FK_C");
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Insert_Puja"("ID_P" integer, "Ofrecido" numeric, "fecha" date, "FK_S" integer, "FK_C" integer) OWNER TO postgres;
+
+
+-- Subasta
+CREATE PROCEDURE "Subastas"."Insert_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer)
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF "Precio" >= 0 THEN
+	INSERT INTO "Subastas"."Subasta"(
+	"ID_Subasta", "Imagen", "Descripcion", "DetallesEntrega", "PrecioBase", "FechaInicio", "FechaFinal", "ForeignKey_Vendedor", "ForeignKey_Busqueda")
+	VALUES ("ID_S", "Img", "Descr", "DetEntrega", "Precio", "FechaI", "FechaF", "FK_V", "FK_B");
+END IF;
+END $$
+$_$;
+
+
+ALTER PROCEDURE "Subastas"."Insert_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer) OWNER TO postgres;
+
+
+-- Vendedor
+CREATE PROCEDURE "Subastas"."Insert_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric)
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+	INSERT INTO "Subastas"."Vendedor"(
+	"ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password", "PuntajeClasificacion")
+	VALUES ("ID_P", "CE", "Nom", "New_Alias", "Tel", "FK_A", "New_Password", "Pun");
+END IF;
+END $$
+$_$;
+
+
+ALTER PROCEDURE "Subastas"."Insert_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric) OWNER TO postgres;
+
+
 --
 -- TOC entry 212 (class 1255 OID 32780)
 -- Name: Select_Admin(); Type: PROCEDURE; Schema: Subastas; Owner: postgres
@@ -335,12 +444,57 @@ ALTER PROCEDURE "Subastas"."Select_Clasificacion"() OWNER TO postgres;
 CREATE PROCEDURE "Subastas"."Select_Comprador"()
     LANGUAGE sql
     AS $$
-SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password"
+SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador"
 	FROM "Subastas"."Comprador";
 $$;
 
 
 ALTER PROCEDURE "Subastas"."Select_Comprador"() OWNER TO postgres;
+
+-- Participante
+CREATE PROCEDURE "Subastas"."Select_Participante"()
+    LANGUAGE sql
+    AS $$
+SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador"
+	FROM "Subastas"."Participante";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Select_Participante"() OWNER TO postgres;
+
+-- Puja
+CREATE PROCEDURE "Subastas"."Select_Puja"()
+    LANGUAGE sql
+    AS $$
+SELECT "ID_Puja", "Ofrecido", "Fecha", "ForeignKey_Subasta", "ForeignKey_Comprador"
+	FROM "Subastas"."Puja";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Select_Puja"() OWNER TO postgres;
+
+-- Subasta
+CREATE PROCEDURE "Subastas"."Select_Subasta"()
+    LANGUAGE sql
+    AS $$
+SELECT "ID_Subasta", "Imagen", "Descripcion", "DetallesEntrega", "PrecioBase", "FechaInicio", "FechaFinal", "ForeignKey_Vendedor", "ForeignKey_Busqueda"
+	FROM "Subastas"."Subasta";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Select_Subasta"() OWNER TO postgres;
+
+-- Vendedor
+CREATE PROCEDURE "Subastas"."Select_Vendedor"()
+    LANGUAGE sql
+    AS $$
+SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "PuntajeClasificacion"
+	FROM "Subastas"."Vendedor";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Select_Vendedor"() OWNER TO postgres;
+
 
 --
 -- TOC entry 217 (class 1255 OID 32779)
@@ -413,6 +567,63 @@ ALTER PROCEDURE "Subastas"."Update_Comprador"("ID_C" integer, "CE" name, "Nom" n
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+-- Participante
+CREATE PROCEDURE "Subastas"."Update_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[])
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+UPDATE "Subastas"."Participante"
+	SET "CorreoElectronico"="CE", "Nombre"="Nom", "Alias"="New_Alias", "Telefono"="Tel", "ForeignKey_Administrador"="FK_A", "Password"="New_Password"
+	WHERE "ID_P" = "ID_Participante";
+END IF;
+END $$
+$_$;
+
+	
+ALTER PROCEDURE "Subastas"."Update_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[]) OWNER TO postgres;
+
+-- Puja
+CREATE PROCEDURE "Subastas"."Update_Puja"("ID_P" integer, "Ofr" numeric, "fecha" date, "FK_S" integer, "FK_C" integer)
+    LANGUAGE sql
+    AS $$
+UPDATE "Subastas"."Puja"
+	SET "ID_Puja"="ID_P", "Ofrecido"="Ofr", "Fecha"="fecha", "ForeignKey_Subasta"="FK_S", "ForeignKey_Comprador"="FK_C"
+	WHERE "ID_P" = "ID_Puja";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Puja"("ID_P" integer, "Ofrecido" numeric, "fecha" date, "FK_S" integer, "FK_C" integer) OWNER TO postgres;
+
+-- Subasta
+CREATE PROCEDURE "Subastas"."Update_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer)
+    LANGUAGE sql
+    AS $$
+UPDATE "Subastas"."Subasta"
+	SET "ID_Subasta"="ID_S", "Imagen"="Img", "Descripcion"="Descr", "DetallesEntrega"="DetEntrega", "PrecioBase"="Precio", "FechaInicio"="FechaI", "FechaFinal"="FechaF", "ForeignKey_Vendedor"="FK_V", "ForeignKey_Busqueda"="FK_B"
+	WHERE "ID_S"="ID_Subasta";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer) OWNER TO postgres;
+
+-- Vendedor
+CREATE PROCEDURE "Subastas"."Update_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric)
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+UPDATE "Subastas"."Vendedor"
+	SET "CorreoElectronico"="CE", "Nombre"="Nom", "Alias"="New_Alias", "Telefono"="Tel", "ForeignKey_Administrador"="FK_A", "Password"="New_Password", "PuntajeClasificacion"="Pun"
+	WHERE "ID_P" = "ID_Participante";
+END IF;
+END $$
+$_$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric) OWNER TO postgres;
+
 
 --
 -- TOC entry 201 (class 1259 OID 24596)
