@@ -2,7 +2,7 @@
 -- PostgreSQL database cluster dump
 --
 
--- Started on 2021-04-18 18:31:20
+-- Started on 2021-04-21 06:52:59
 
 SET default_transaction_read_only = off;
 
@@ -15,10 +15,18 @@ SET standard_conforming_strings = on;
 
 CREATE ROLE "Admin";
 ALTER ROLE "Admin" WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:mFKjO/hWVyWGy0vzFoyuSA==$hdA2MEsLf5o2fDmrUdKpW6C/wtpv/WEeTHTgm6CyIUQ=:T/e5LL553Q3lY7mgwPNZqxxnHV81Fs+oDn5nAkk36p4=';
+CREATE ROLE "Alias";
+ALTER ROLE "Alias" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:X3fV3meOWNzJUoSKI+8gbA==$i57rF0bgpVFf81EK2nrzFEnCtOm0U2GlP5rCIsPTFa4=:hu96z8LacUdTrb8ZfazgtKOUqAQIsVRLeWA1SGlLG4s=';
+CREATE ROLE "New_Alias";
+ALTER ROLE "New_Alias" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS;
 CREATE ROLE "User";
 ALTER ROLE "User" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS;
 CREATE ROLE postgres;
 ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:vuc3ePvc+jblXmLtZ/aUXQ==$lDmYkoKa9MGs7hhTv1KS4KW57iOSLVmy8cuMANVtHG4=:oN0i9wLoOf6rRbqzzKGGQWVbB63fsYOmLZIV6lR1zlY=';
+CREATE ROLE test1;
+ALTER ROLE test1 WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:ASix+wFnDueL2DT6X6Fk0g==$IumL4tBqvvFER9UYs2+tFOyrM6XHj5rO2VwJ4G62cdU=:Ij4vnCp3HYiMsJOkClmjliOBF73gl+SigBaCKyAbeL8=';
+CREATE ROLE username;
+ALTER ROLE username WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:PhPlFRvfzhqJ4vAnMENVCQ==$WzLGIy36R4tzVlQWZqSeqT48SL3Tgif6L2avO+A1O2Y=:yhfIcPtO8nIGIqArU4rpz0Ly58pnnPvb9XwT3SWPBqI=';
 --
 -- User Configurations
 --
@@ -51,7 +59,7 @@ ALTER ROLE postgres SET search_path TO 'Subastas', '$user', 'public';
 -- Dumped from database version 13.2
 -- Dumped by pg_dump version 13.2
 
--- Started on 2021-04-18 18:31:20
+-- Started on 2021-04-21 06:53:00
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -64,7 +72,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
--- Completed on 2021-04-18 18:31:20
+-- Completed on 2021-04-21 06:53:00
 
 --
 -- PostgreSQL database dump complete
@@ -81,7 +89,7 @@ SET row_security = off;
 -- Dumped from database version 13.2
 -- Dumped by pg_dump version 13.2
 
--- Started on 2021-04-18 18:31:20
+-- Started on 2021-04-21 06:53:00
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -95,7 +103,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3086 (class 1262 OID 24586)
+-- TOC entry 3111 (class 1262 OID 24586)
 -- Name: Progra_1; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -118,8 +126,8 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3087 (class 0 OID 0)
--- Dependencies: 3086
+-- TOC entry 3112 (class 0 OID 0)
+-- Dependencies: 3111
 -- Name: DATABASE "Progra_1"; Type: COMMENT; Schema: -; Owner: postgres
 --
 
@@ -127,7 +135,7 @@ COMMENT ON DATABASE "Progra_1" IS 'Base de datos para la progra 1';
 
 
 --
--- TOC entry 3088 (class 0 OID 0)
+-- TOC entry 3114 (class 0 OID 0)
 -- Name: Progra_1; Type: DATABASE PROPERTIES; Schema: -; Owner: postgres
 --
 
@@ -158,7 +166,7 @@ CREATE SCHEMA "Subastas";
 ALTER SCHEMA "Subastas" OWNER TO postgres;
 
 --
--- TOC entry 235 (class 1255 OID 40990)
+-- TOC entry 233 (class 1255 OID 40990)
 -- Name: Delelte_Comprador(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -173,7 +181,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Delelte_Comprador"("ID_C" integer) OWNER TO postgres;
 
 --
--- TOC entry 213 (class 1255 OID 32783)
+-- TOC entry 212 (class 1255 OID 32783)
 -- Name: Delete_Admin(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -190,7 +198,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Delete_Admin"("ID_A" integer) OWNER TO postgres;
 
 --
--- TOC entry 214 (class 1255 OID 40980)
+-- TOC entry 213 (class 1255 OID 40980)
 -- Name: Delete_Busqueda(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -205,7 +213,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Delete_Busqueda"("ID_B" integer) OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1255 OID 40985)
+-- TOC entry 218 (class 1255 OID 40985)
 -- Name: Delete_Clasificacion(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -220,24 +228,80 @@ $$;
 ALTER PROCEDURE "Subastas"."Delete_Clasificacion"("ID_C" integer) OWNER TO postgres;
 
 --
--- TOC entry 231 (class 1255 OID 32798)
--- Name: Insert_Admin(integer, character varying, character varying); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+-- TOC entry 216 (class 1255 OID 41184)
+-- Name: Delete_Participante(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
-CREATE PROCEDURE "Subastas"."Insert_Admin"("New_Alias" integer, "New_Password" character varying, "ID_A" character varying)
+CREATE PROCEDURE "Subastas"."Delete_Participante"("ID_P" integer)
     LANGUAGE sql
-    AS $_$
-DO $$
-IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
-	INSERT INTO "Subastas"."Administrador"(
-		"ID_Administrador", "Alias", "Password")
-		VALUES ("ID_A", "New_Alias", "New_Password");
-END IF;
-END $$
-$_$;
+    AS $$
+DELETE FROM "Subastas"."Participante"
+	WHERE "ID_P" = "ID_Participante";
+$$;
 
 
-ALTER PROCEDURE "Subastas"."Insert_Admin"("New_Alias" integer, "New_Password" character varying, "ID_A" character varying) OWNER TO postgres;
+ALTER PROCEDURE "Subastas"."Delete_Participante"("ID_P" integer) OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1255 OID 41185)
+-- Name: Delete_Puja(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Delete_Puja"("ID_P" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Puja"
+	WHERE "ID_P" = "ID_Puja";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delete_Puja"("ID_P" integer) OWNER TO postgres;
+
+--
+-- TOC entry 238 (class 1255 OID 41186)
+-- Name: Delete_Subasta(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Delete_Subasta"("ID_S" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Subasta"
+	WHERE "ID_S" = "ID_Subasta";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delete_Subasta"("ID_S" integer) OWNER TO postgres;
+
+--
+-- TOC entry 239 (class 1255 OID 41187)
+-- Name: Delete_Vendedor(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Delete_Vendedor"("ID_V" integer)
+    LANGUAGE sql
+    AS $$
+DELETE FROM "Subastas"."Vendedor"
+	WHERE "ID_V" = "ID_Participante";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Delete_Vendedor"("ID_V" integer) OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1255 OID 41210)
+-- Name: Insert_Admin(character varying, character varying); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Insert_Admin"("New_Alias" character varying, "New_Password" character varying)
+    LANGUAGE sql
+    AS $$
+INSERT INTO "Subastas"."Administrador"(
+		"Alias", "Password")
+		VALUES ("New_Alias", "New_Password");
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Insert_Admin"("New_Alias" character varying, "New_Password" character varying) OWNER TO postgres;
 
 --
 -- TOC entry 211 (class 1255 OID 40977)
@@ -256,7 +320,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Insert_Busqueda"("CP" name, "CS" name) OWNER TO postgres;
 
 --
--- TOC entry 218 (class 1255 OID 40984)
+-- TOC entry 217 (class 1255 OID 40984)
 -- Name: Insert_Clasificacion(integer, integer, integer, integer, text); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -272,7 +336,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Insert_Clasificacion"("ID_C" integer, "FK_V" integer, "FK_C" integer, "Punt" integer, "Desc" text) OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1255 OID 40988)
+-- TOC entry 232 (class 1255 OID 40988)
 -- Name: Insert_Comprador(integer, name, name, character[], numeric, integer, character[]); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -292,112 +356,83 @@ $_$;
 ALTER PROCEDURE "Subastas"."Insert_Comprador"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[]) OWNER TO postgres;
 
 --
--- TOC entry 237 (class 1255 OID 41085)
--- Name: List_Cat_y_Subcat(name, name); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+-- TOC entry 240 (class 1255 OID 41188)
+-- Name: Insert_Participante(integer, name, name, character[], numeric, integer, character[]); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
-CREATE PROCEDURE "Subastas"."List_Cat_y_Subcat"("CP" name, "CS" name)
+CREATE PROCEDURE "Subastas"."Insert_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[])
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+	INSERT INTO "Subastas"."Participante"(
+	"ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password")
+	VALUES ("ID_P", "CE", "Nom", "New_Alias", "Tel", "FK_A", "New_Password");
+END IF;
+END $$
+$_$;
+
+
+ALTER PROCEDURE "Subastas"."Insert_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[]) OWNER TO postgres;
+
+--
+-- TOC entry 241 (class 1255 OID 41189)
+-- Name: Insert_Puja(integer, numeric, date, integer, integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Insert_Puja"("ID_P" integer, "Ofrecido" numeric, fecha date, "FK_S" integer, "FK_C" integer)
     LANGUAGE sql
     AS $$
-SELECT 
-"ID_Subasta","Imagen","Descripcion","DetallesEntrega"
-,"PrecioBase","FechaInicio","FechaFinal","ForeignKey_Vendedor"
-,"ForeignKey_Busqueda" 
-FROM "Subastas"."Subasta"
-INNER JOIN "Subastas"."Busqueda" 
-ON "Subasta"."ForeignKey_Busqueda" = "Busqueda"."ID_Busqueda" 
-AND "CP" = "Busqueda"."CategoriaPrimaria"
-AND "CS" = "Busqueda"."CategoriaSecundaria" 
-ORDER BY "Subasta"."FechaFinal" DESC;
+	INSERT INTO "Subastas"."Puja"(
+	"ID_Puja", "Ofrecido", "Fecha", "ForeignKey_Subasta", "ForeignKey_Comprador")
+	VALUES ("ID_P", "Ofrecido", "fecha", "FK_S", "FK_C");
 $$;
 
 
-ALTER PROCEDURE "Subastas"."List_Cat_y_Subcat"("CP" name, "CS" name) OWNER TO postgres;
+ALTER PROCEDURE "Subastas"."Insert_Puja"("ID_P" integer, "Ofrecido" numeric, fecha date, "FK_S" integer, "FK_C" integer) OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1255 OID 41182)
--- Name: List_SubGanadas(integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+-- TOC entry 247 (class 1255 OID 41200)
+-- Name: Insert_Subasta(integer, oid, text, text, numeric, date, date, integer, integer, numeric); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
-CREATE PROCEDURE "Subastas"."List_SubGanadas"("ID_C" integer)
+CREATE PROCEDURE "Subastas"."Insert_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer, "PF" numeric)
     LANGUAGE sql
-    AS $$
-SELECT "PrecioFinal","PrecioBase","Descripcion","DetallesEntrega"
-FROM "Subastas"."Subasta"
-INNER JOIN "Subastas"."Comprador"
-ON "ID_C" = "Comprador"."ID_Participante"
-INNER JOIN "Subastas"."Puja"
-ON "Subasta"."PrecioFinal" = "Puja"."Ofrecido"
-AND "ID_C" = "Puja"."ForeignKey_Comprador"
-AND "Puja"."ForeignKey_Subasta" = "Subasta"."ID_Subasta"
-ORDER BY "Subasta"."FechaFinal" DESC;
-$$;
+    AS $_$
+DO $$
+IF "Precio" >= 0 THEN
+	INSERT INTO "Subastas"."Subasta"(
+	"ID_Subasta", "Imagen", "Descripcion", "DetallesEntrega", "PrecioBase", "FechaInicio", "FechaFinal", "ForeignKey_Vendedor", "ForeignKey_Busqueda","PrecioFinal")
+	VALUES ("ID_S", "Img", "Descr", "DetEntrega", "Precio", "FechaI", "FechaF", "FK_V", "FK_B", "PF");
+END IF;
+END $$
+$_$;
 
 
-ALTER PROCEDURE "Subastas"."List_SubGanadas"("ID_C" integer) OWNER TO postgres;
+ALTER PROCEDURE "Subastas"."Insert_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer, "PF" numeric) OWNER TO postgres;
 
 --
--- TOC entry 212 (class 1255 OID 32780)
--- Name: Select_Admin(); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+-- TOC entry 242 (class 1255 OID 41191)
+-- Name: Insert_Vendedor(integer, name, name, character[], numeric, integer, character[], numeric); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
-CREATE PROCEDURE "Subastas"."Select_Admin"()
+CREATE PROCEDURE "Subastas"."Insert_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric)
     LANGUAGE sql
-    AS $$
-SELECT "ID_Administrador", "Alias", "Password"
-	FROM "Subastas"."Administrador";
-$$;
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+	INSERT INTO "Subastas"."Vendedor"(
+	"ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password", "PuntajeClasificacion")
+	VALUES ("ID_P", "CE", "Nom", "New_Alias", "Tel", "FK_A", "New_Password", "Pun");
+END IF;
+END $$
+$_$;
 
 
-ALTER PROCEDURE "Subastas"."Select_Admin"() OWNER TO postgres;
-
---
--- TOC entry 238 (class 1255 OID 40981)
--- Name: Select_Busqueda(); Type: PROCEDURE; Schema: Subastas; Owner: postgres
---
-
-CREATE PROCEDURE "Subastas"."Select_Busqueda"()
-    LANGUAGE sql
-    AS $$
-SELECT "ID_Busqueda", "CategoriaPrimaria", "CategoriaSecundaria"
-	FROM "Subastas"."Busqueda";
-$$;
-
-
-ALTER PROCEDURE "Subastas"."Select_Busqueda"() OWNER TO postgres;
+ALTER PROCEDURE "Subastas"."Insert_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric) OWNER TO postgres;
 
 --
--- TOC entry 217 (class 1255 OID 40983)
--- Name: Select_Clasificacion(); Type: PROCEDURE; Schema: Subastas; Owner: postgres
---
-
-CREATE PROCEDURE "Subastas"."Select_Clasificacion"()
-    LANGUAGE sql
-    AS $$
-SELECT "ID_Clasificacion", "ForeignKey_Vendedor", "ForeignKey_Comprador", "Puntaje", "Descripcion"
-	FROM "Subastas"."Clasificacion";
-$$;
-
-
-ALTER PROCEDURE "Subastas"."Select_Clasificacion"() OWNER TO postgres;
-
---
--- TOC entry 233 (class 1255 OID 40987)
--- Name: Select_Comprador(); Type: PROCEDURE; Schema: Subastas; Owner: postgres
---
-
-CREATE PROCEDURE "Subastas"."Select_Comprador"()
-    LANGUAGE sql
-    AS $$
-SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password"
-	FROM "Subastas"."Comprador";
-$$;
-
-
-ALTER PROCEDURE "Subastas"."Select_Comprador"() OWNER TO postgres;
-
---
--- TOC entry 216 (class 1255 OID 32779)
+-- TOC entry 215 (class 1255 OID 32779)
 -- Name: Update_Admin(integer, character varying, character varying); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -413,7 +448,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Update_Admin"(id_a integer, new_alias character varying, new_password character varying) OWNER TO postgres;
 
 --
--- TOC entry 215 (class 1255 OID 40982)
+-- TOC entry 214 (class 1255 OID 40982)
 -- Name: Update_Busqueda(integer, name, name); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -429,7 +464,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Update_Busqueda"("ID_B" integer, "CP" name, "CS" name) OWNER TO postgres;
 
 --
--- TOC entry 232 (class 1255 OID 40986)
+-- TOC entry 231 (class 1255 OID 40986)
 -- Name: Update_Clasificacion(integer, integer, integer, integer, text); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -445,7 +480,7 @@ $$;
 ALTER PROCEDURE "Subastas"."Update_Clasificacion"("ID_C" integer, "FK_V" integer, "FK_C" integer, "Punt" integer, "Desc" text) OWNER TO postgres;
 
 --
--- TOC entry 236 (class 1255 OID 41081)
+-- TOC entry 234 (class 1255 OID 41081)
 -- Name: Update_Comprador(integer, name, name, character[], numeric, integer, character[]); Type: PROCEDURE; Schema: Subastas; Owner: postgres
 --
 
@@ -463,6 +498,361 @@ $_$;
 
 
 ALTER PROCEDURE "Subastas"."Update_Comprador"("ID_C" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[]) OWNER TO postgres;
+
+--
+-- TOC entry 237 (class 1255 OID 41207)
+-- Name: Update_Nuevo_Precio_Subasta(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas"."Update_Nuevo_Precio_Subasta"() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+UPDATE "Subastas"."Subasta"
+	SET "PrecioFinal"= NEW."Ofrecido"
+	WHERE MAX("PrecioFinal"*NEW."Ofrecido"/"PrecioFinal",1000) AND NEW."ForeignKey_Subasta" = "ID_Subasta";
+END;
+$$;
+
+
+ALTER FUNCTION "Subastas"."Update_Nuevo_Precio_Subasta"() OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1255 OID 41203)
+-- Name: Update_Nuevo_Precio_Subasta(integer, numeric); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Update_Nuevo_Precio_Subasta"("ID_S" integer, "PF" numeric)
+    LANGUAGE sql
+    AS $$
+UPDATE "Subastas"."Subasta"
+	SET "PrecioFinal"="PF"
+	WHERE "PF" > "PrecioFinal" AND "ID_S" = "ID_Subasta";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Nuevo_Precio_Subasta"("ID_S" integer, "PF" numeric) OWNER TO postgres;
+
+--
+-- TOC entry 243 (class 1255 OID 41196)
+-- Name: Update_Participante(integer, name, name, character[], numeric, integer, character[]); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Update_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[])
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+UPDATE "Subastas"."Participante"
+	SET "CorreoElectronico"="CE", "Nombre"="Nom", "Alias"="New_Alias", "Telefono"="Tel", "ForeignKey_Administrador"="FK_A", "Password"="New_Password"
+	WHERE "ID_P" = "ID_Participante";
+END IF;
+END $$
+$_$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Participante"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[]) OWNER TO postgres;
+
+--
+-- TOC entry 244 (class 1255 OID 41197)
+-- Name: Update_Puja(integer, numeric, date, integer, integer); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Update_Puja"("ID_P" integer, "Ofr" numeric, fecha date, "FK_S" integer, "FK_C" integer)
+    LANGUAGE sql
+    AS $$
+UPDATE "Subastas"."Puja"
+	SET "ID_Puja"="ID_P", "Ofrecido"="Ofr", "Fecha"="fecha", "ForeignKey_Subasta"="FK_S", "ForeignKey_Comprador"="FK_C"
+	WHERE "ID_P" = "ID_Puja";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Puja"("ID_P" integer, "Ofr" numeric, fecha date, "FK_S" integer, "FK_C" integer) OWNER TO postgres;
+
+--
+-- TOC entry 246 (class 1255 OID 41201)
+-- Name: Update_Subasta(integer, oid, text, text, numeric, date, date, integer, integer, numeric); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Update_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer, "PF" numeric)
+    LANGUAGE sql
+    AS $$
+UPDATE "Subastas"."Subasta"
+	SET "ID_Subasta"="ID_S", "Imagen"="Img", "Descripcion"="Descr", "DetallesEntrega"="DetEntrega", "PrecioBase"="Precio", "FechaInicio"="FechaI", "FechaFinal"="FechaF", "ForeignKey_Vendedor"="FK_V", "ForeignKey_Busqueda"="FK_B", "PrecioFinal"="PF"
+	WHERE "ID_S"="ID_Subasta";
+$$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Subasta"("ID_S" integer, "Img" oid, "Descr" text, "DetEntrega" text, "Precio" numeric, "FechaI" date, "FechaF" date, "FK_V" integer, "FK_B" integer, "PF" numeric) OWNER TO postgres;
+
+--
+-- TOC entry 245 (class 1255 OID 41199)
+-- Name: Update_Vendedor(integer, name, name, character[], numeric, integer, character[], numeric); Type: PROCEDURE; Schema: Subastas; Owner: postgres
+--
+
+CREATE PROCEDURE "Subastas"."Update_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric)
+    LANGUAGE sql
+    AS $_$
+DO $$
+IF LENGTH("New_Alias") < 21 AND LENGTH("New_Password") >= 8 AND LENGTH("New_Password") < 16 THEN
+UPDATE "Subastas"."Vendedor"
+	SET "CorreoElectronico"="CE", "Nombre"="Nom", "Alias"="New_Alias", "Telefono"="Tel", "ForeignKey_Administrador"="FK_A", "Password"="New_Password", "PuntajeClasificacion"="Pun"
+	WHERE "ID_P" = "ID_Participante";
+END IF;
+END $$
+$_$;
+
+
+ALTER PROCEDURE "Subastas"."Update_Vendedor"("ID_P" integer, "CE" name, "Nom" name, "New_Alias" character[], "Tel" numeric, "FK_A" integer, "New_Password" character[], "Pun" numeric) OWNER TO postgres;
+
+--
+-- TOC entry 258 (class 1255 OID 41232)
+-- Name: list_historial_pujas(integer); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".list_historial_pujas(id_s integer) RETURNS TABLE(id_puja integer, ofrecido numeric, fecha date, foreignkey_subasta integer, foreignkey_comprador integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+	SELECT "ID_Puja", "Ofrecido", "Fecha", "ForeignKey_Subasta", "ForeignKey_Comprador"
+	FROM "Subastas"."Puja" 
+	INNER JOIN "Subastas"."Subasta"
+	ON "Subasta"."ID_Subasta" = "Puja"."ForeignKey_Subasta" AND "Subasta"."ID_Subasta" = id_s
+	ORDER BY "Puja"."Fecha" desc;
+
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".list_historial_pujas(id_s integer) OWNER TO postgres;
+
+--
+-- TOC entry 259 (class 1255 OID 41233)
+-- Name: list_historial_subastas(integer); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".list_historial_subastas(id_v integer) RETURNS TABLE(preciobase numeric, preciofinal numeric, comentario text)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+	SELECT "PrecioBase", "PrecioFinal", "Clasificacion"."Descripcion"
+	FROM "Subastas"."Puja"
+	INNER JOIN "Subastas"."Subasta"
+	ON "Subasta"."ID_Subasta" = "Puja"."ForeignKey_Subasta"
+	INNER JOIN "Subastas"."Vendedor"
+	ON "Vendedor"."ID_Participante" = id_v
+	INNER JOIN "Subastas"."Clasificacion"
+	ON "Clasificacion"."ForeignKey_Vendedor" = id_v
+	ORDER BY "Subasta"."FechaFinal" desc;
+
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".list_historial_subastas(id_v integer) OWNER TO postgres;
+
+--
+-- TOC entry 250 (class 1255 OID 41222)
+-- Name: list_subganadas(integer); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".list_subganadas("ID_C" integer) RETURNS TABLE(preciofinal numeric, preciobase numeric, descripcion text, detallesentrega text)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+   SELECT "PrecioFinal","PrecioBase","Descripcion","DetallesEntrega"
+	FROM "Subastas"."Subasta"
+	INNER JOIN "Subastas"."Comprador"
+	ON "ID_C" = "Comprador"."ID_Participante"
+	INNER JOIN "Subastas"."Puja"
+	ON "Subasta"."PrecioFinal" = "Puja"."Ofrecido"
+	AND "ID_C" = "Puja"."ForeignKey_Comprador"
+	AND "Puja"."ForeignKey_Subasta" = "Subasta"."ID_Subasta"
+	ORDER BY "Subasta"."FechaFinal" DESC;
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".list_subganadas("ID_C" integer) OWNER TO postgres;
+
+--
+-- TOC entry 248 (class 1255 OID 41220)
+-- Name: listado_por_cat_y_subcat(name, name); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".listado_por_cat_y_subcat("CP" name, "CS" name) RETURNS TABLE("ID_SUBASTA" integer, "IMAGEN" oid, "DESCRIPCION" text, "DETALLESENTREGA" text, "PRECIOBASE" numeric, "FECHAINICIO" date, "FECHAFINAL" date, "FK_VENDEDOR" integer, "FK_BUSQUEDA" integer, "PRECIOFINAL" numeric)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    RETURN QUERY
+	SELECT 
+	"ID_Subasta","Imagen","Descripcion","DetallesEntrega"
+	,"PrecioBase","FechaInicio","FechaFinal","ForeignKey_Vendedor"
+	,"ForeignKey_Busqueda","PrecioFinal" 
+	FROM "Subastas"."Subasta"
+	INNER JOIN "Subastas"."Busqueda"
+	ON "Subasta"."ForeignKey_Busqueda" = "Busqueda"."ID_Busqueda" 
+	AND "CP" = "Busqueda"."CategoriaPrimaria"
+	AND "CS" = "Busqueda"."CategoriaSecundaria"
+	AND "Subasta"."FechaFinal" >= CURRENT_DATE
+	ORDER BY "Subasta"."FechaFinal" DESC;
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".listado_por_cat_y_subcat("CP" name, "CS" name) OWNER TO postgres;
+
+--
+-- TOC entry 255 (class 1255 OID 41229)
+-- Name: select_admin(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_admin() RETURNS TABLE(id_admin integer, alias name, password name)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+	SELECT "ID_Administrador", "Alias", "Password"
+	FROM "Subastas"."Administrador";
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_admin() OWNER TO postgres;
+
+--
+-- TOC entry 256 (class 1255 OID 41230)
+-- Name: select_busqueda(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_busqueda() RETURNS TABLE(id_busqueda integer, categoriaprimaria name, categoriasecundaria name)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+	SELECT "ID_Busqueda", "CategoriaPrimaria", "CategoriaSecundaria"
+	FROM "Subastas"."Busqueda";
+
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_busqueda() OWNER TO postgres;
+
+--
+-- TOC entry 257 (class 1255 OID 41231)
+-- Name: select_clasificacion(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_clasificacion() RETURNS TABLE(id_clasificacion integer, foreignkey_vendedor integer, foreignkey_comprador integer, puntaje integer, descripcion text)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+	SELECT "ID_Clasificacion", "ForeignKey_Vendedor", "ForeignKey_Comprador", "Puntaje", "Descripcion"
+	FROM "Subastas"."Clasificacion";
+
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_clasificacion() OWNER TO postgres;
+
+--
+-- TOC entry 253 (class 1255 OID 41227)
+-- Name: select_comprador(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_comprador() RETURNS TABLE(id_participante integer, correoelectronico name, nombre name, alias character[], tel numeric, fkadmin integer, password character[])
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+   SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password"
+	FROM "Subastas"."Comprador";
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_comprador() OWNER TO postgres;
+
+--
+-- TOC entry 251 (class 1255 OID 41224)
+-- Name: select_participante(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_participante() RETURNS TABLE(id_participante integer, correoelectronico name, nombre name, alias character[], tel numeric, fkadmin integer, password character[])
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+   SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador","Password"
+	FROM "Subastas"."Participante";
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_participante() OWNER TO postgres;
+
+--
+-- TOC entry 254 (class 1255 OID 41228)
+-- Name: select_puja(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_puja() RETURNS TABLE(id_puja integer, ofrecido numeric, fecha date, fksubasta integer, fkcomprador integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+   SELECT "ID_Puja", "Ofrecido", "Fecha", "ForeignKey_Subasta", "ForeignKey_Comprador"
+	FROM "Subastas"."Puja";
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_puja() OWNER TO postgres;
+
+--
+-- TOC entry 249 (class 1255 OID 41221)
+-- Name: select_subasta(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_subasta() RETURNS TABLE("ID_SUBASTA" integer, "IMAGEN" oid, "DESCRIPCION" text, "DETALLESENTREGA" text, "PRECIOBASE" numeric, "FECHAINICIO" date, "FECHAFINAL" date, "FK_VENDEDOR" integer, "FK_BUSQUEDA" integer, "PRECIOFINAL" numeric)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    RETURN QUERY
+	SELECT 
+	"ID_Subasta","Imagen","Descripcion","DetallesEntrega"
+	,"PrecioBase","FechaInicio","FechaFinal","ForeignKey_Vendedor"
+	,"ForeignKey_Busqueda","PrecioFinal" 
+	FROM "Subastas"."Subasta";
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_subasta() OWNER TO postgres;
+
+--
+-- TOC entry 252 (class 1255 OID 41226)
+-- Name: select_vendedor(); Type: FUNCTION; Schema: Subastas; Owner: postgres
+--
+
+CREATE FUNCTION "Subastas".select_vendedor() RETURNS TABLE(id_participante integer, correoelectronico name, nombre name, alias character[], tel numeric, fkadmin integer, password character[], puntaje numeric)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+   RETURN QUERY
+   SELECT "ID_Participante", "CorreoElectronico", "Nombre", "Alias", "Telefono", "ForeignKey_Administrador", "Password","PuntajeClasificacion"
+	FROM "Subastas"."Vendedor";
+END
+$$;
+
+
+ALTER FUNCTION "Subastas".select_vendedor() OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -638,7 +1028,7 @@ INHERITS ("Subastas"."Participante");
 ALTER TABLE "Subastas"."Vendedor" OWNER TO postgres;
 
 --
--- TOC entry 3077 (class 2613 OID 41175)
+-- TOC entry 3102 (class 2613 OID 41175)
 -- Name: 41175; Type: BLOB; Schema: -; Owner: postgres
 --
 
@@ -648,7 +1038,7 @@ SELECT pg_catalog.lo_create('41175');
 ALTER LARGE OBJECT 41175 OWNER TO postgres;
 
 --
--- TOC entry 3078 (class 2613 OID 41176)
+-- TOC entry 3103 (class 2613 OID 41176)
 -- Name: 41176; Type: BLOB; Schema: -; Owner: postgres
 --
 
@@ -658,7 +1048,7 @@ SELECT pg_catalog.lo_create('41176');
 ALTER LARGE OBJECT 41176 OWNER TO postgres;
 
 --
--- TOC entry 3079 (class 2613 OID 41177)
+-- TOC entry 3104 (class 2613 OID 41177)
 -- Name: 41177; Type: BLOB; Schema: -; Owner: postgres
 --
 
@@ -668,18 +1058,20 @@ SELECT pg_catalog.lo_create('41177');
 ALTER LARGE OBJECT 41177 OWNER TO postgres;
 
 --
--- TOC entry 3067 (class 0 OID 24596)
+-- TOC entry 3092 (class 0 OID 24596)
 -- Dependencies: 201
 -- Data for Name: Administrador; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
 
 COPY "Subastas"."Administrador" ("ID_Administrador", "Alias", "Password") FROM stdin;
 1	Admin0	AdminPassword0
+2	Test_Admin	Test_Admin_Password
+3	a	1
 \.
 
 
 --
--- TOC entry 3066 (class 0 OID 24588)
+-- TOC entry 3091 (class 0 OID 24588)
 -- Dependencies: 200
 -- Data for Name: Busqueda; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
@@ -1137,7 +1529,7 @@ COPY "Subastas"."Busqueda" ("ID_Busqueda", "CategoriaPrimaria", "CategoriaSecund
 
 
 --
--- TOC entry 3074 (class 0 OID 24771)
+-- TOC entry 3099 (class 0 OID 24771)
 -- Dependencies: 208
 -- Data for Name: Clasificacion; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
@@ -1147,7 +1539,7 @@ COPY "Subastas"."Clasificacion" ("ID_Clasificacion", "ForeignKey_Vendedor", "For
 
 
 --
--- TOC entry 3070 (class 0 OID 24624)
+-- TOC entry 3095 (class 0 OID 24624)
 -- Dependencies: 204
 -- Data for Name: Comprador; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
@@ -1157,7 +1549,7 @@ COPY "Subastas"."Comprador" ("ID_Participante", "CorreoElectronico", "Nombre", "
 
 
 --
--- TOC entry 3068 (class 0 OID 24604)
+-- TOC entry 3093 (class 0 OID 24604)
 -- Dependencies: 202
 -- Data for Name: Participante; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
@@ -1167,7 +1559,7 @@ COPY "Subastas"."Participante" ("ID_Participante", "CorreoElectronico", "Nombre"
 
 
 --
--- TOC entry 3076 (class 0 OID 24807)
+-- TOC entry 3101 (class 0 OID 24807)
 -- Dependencies: 210
 -- Data for Name: Puja; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
@@ -1177,7 +1569,7 @@ COPY "Subastas"."Puja" ("ID_Puja", "Ofrecido", "Fecha", "ForeignKey_Subasta", "F
 
 
 --
--- TOC entry 3075 (class 0 OID 24789)
+-- TOC entry 3100 (class 0 OID 24789)
 -- Dependencies: 209
 -- Data for Name: Subasta; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
@@ -1190,7 +1582,7 @@ COPY "Subastas"."Subasta" ("ID_Subasta", "Imagen", "Descripcion", "DetallesEntre
 
 
 --
--- TOC entry 3069 (class 0 OID 24618)
+-- TOC entry 3094 (class 0 OID 24618)
 -- Dependencies: 203
 -- Data for Name: Vendedor; Type: TABLE DATA; Schema: Subastas; Owner: postgres
 --
@@ -1201,16 +1593,16 @@ COPY "Subastas"."Vendedor" ("ID_Participante", "CorreoElectronico", "Nombre", "A
 
 
 --
--- TOC entry 3089 (class 0 OID 0)
+-- TOC entry 3123 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: Administrador_ID_Administrador_seq; Type: SEQUENCE SET; Schema: Subastas; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Subastas"."Administrador_ID_Administrador_seq"', 1, true);
+SELECT pg_catalog.setval('"Subastas"."Administrador_ID_Administrador_seq"', 3, true);
 
 
 --
--- TOC entry 3090 (class 0 OID 0)
+-- TOC entry 3124 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: Busqueda_ID_Busqueda_seq; Type: SEQUENCE SET; Schema: Subastas; Owner: postgres
 --
@@ -1219,7 +1611,7 @@ SELECT pg_catalog.setval('"Subastas"."Busqueda_ID_Busqueda_seq"', 448, true);
 
 
 --
--- TOC entry 3091 (class 0 OID 0)
+-- TOC entry 3125 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: Participante_ID_Participante_seq; Type: SEQUENCE SET; Schema: Subastas; Owner: postgres
 --
@@ -1228,7 +1620,7 @@ SELECT pg_catalog.setval('"Subastas"."Participante_ID_Participante_seq"', 1, fal
 
 
 --
--- TOC entry 3080 (class 0 OID 0)
+-- TOC entry 3105 (class 0 OID 0)
 -- Data for Name: BLOBS; Type: BLOBS; Schema: -; Owner: -
 --
 
@@ -1273,7 +1665,7 @@ SELECT pg_catalog.lo_close(0);
 COMMIT;
 
 --
--- TOC entry 2911 (class 2606 OID 24702)
+-- TOC entry 2931 (class 2606 OID 24702)
 -- Name: Administrador Administrador_pkey; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1282,7 +1674,7 @@ ALTER TABLE ONLY "Subastas"."Administrador"
 
 
 --
--- TOC entry 2907 (class 2606 OID 24715)
+-- TOC entry 2927 (class 2606 OID 24715)
 -- Name: Busqueda Busqueda_pkey; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1291,7 +1683,16 @@ ALTER TABLE ONLY "Subastas"."Busqueda"
 
 
 --
--- TOC entry 2913 (class 2606 OID 24770)
+-- TOC entry 2942 (class 2606 OID 41217)
+-- Name: Comprador Comprador_pkey; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
+--
+
+ALTER TABLE ONLY "Subastas"."Comprador"
+    ADD CONSTRAINT "Comprador_pkey" PRIMARY KEY ("ID_Participante");
+
+
+--
+-- TOC entry 2933 (class 2606 OID 24770)
 -- Name: Administrador ID_A; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1300,7 +1701,7 @@ ALTER TABLE ONLY "Subastas"."Administrador"
 
 
 --
--- TOC entry 2909 (class 2606 OID 24768)
+-- TOC entry 2929 (class 2606 OID 24768)
 -- Name: Busqueda ID_B; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1309,7 +1710,7 @@ ALTER TABLE ONLY "Subastas"."Busqueda"
 
 
 --
--- TOC entry 2920 (class 2606 OID 24766)
+-- TOC entry 2944 (class 2606 OID 24766)
 -- Name: Comprador ID_C; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1318,7 +1719,7 @@ ALTER TABLE ONLY "Subastas"."Comprador"
 
 
 --
--- TOC entry 2922 (class 2606 OID 24778)
+-- TOC entry 2946 (class 2606 OID 24778)
 -- Name: Clasificacion ID_Cl; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1327,7 +1728,7 @@ ALTER TABLE ONLY "Subastas"."Clasificacion"
 
 
 --
--- TOC entry 2926 (class 2606 OID 24816)
+-- TOC entry 2950 (class 2606 OID 24816)
 -- Name: Puja ID_P; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1336,7 +1737,7 @@ ALTER TABLE ONLY "Subastas"."Puja"
 
 
 --
--- TOC entry 2924 (class 2606 OID 24796)
+-- TOC entry 2948 (class 2606 OID 24796)
 -- Name: Subasta ID_S; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1345,7 +1746,7 @@ ALTER TABLE ONLY "Subastas"."Subasta"
 
 
 --
--- TOC entry 2918 (class 2606 OID 24764)
+-- TOC entry 2938 (class 2606 OID 24764)
 -- Name: Vendedor ID_V; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1354,7 +1755,7 @@ ALTER TABLE ONLY "Subastas"."Vendedor"
 
 
 --
--- TOC entry 2915 (class 2606 OID 24723)
+-- TOC entry 2935 (class 2606 OID 24723)
 -- Name: Participante Participante_pkey; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1363,7 +1764,7 @@ ALTER TABLE ONLY "Subastas"."Participante"
 
 
 --
--- TOC entry 2928 (class 2606 OID 24814)
+-- TOC entry 2952 (class 2606 OID 24814)
 -- Name: Puja Puja_pkey; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1372,7 +1773,16 @@ ALTER TABLE ONLY "Subastas"."Puja"
 
 
 --
--- TOC entry 2916 (class 1259 OID 24664)
+-- TOC entry 2940 (class 2606 OID 41215)
+-- Name: Vendedor Vendedor_pkey; Type: CONSTRAINT; Schema: Subastas; Owner: postgres
+--
+
+ALTER TABLE ONLY "Subastas"."Vendedor"
+    ADD CONSTRAINT "Vendedor_pkey" PRIMARY KEY ("ID_Participante");
+
+
+--
+-- TOC entry 2936 (class 1259 OID 24664)
 -- Name: fki_FK_Admin; Type: INDEX; Schema: Subastas; Owner: postgres
 --
 
@@ -1380,7 +1790,15 @@ CREATE INDEX "fki_FK_Admin" ON "Subastas"."Participante" USING btree ("ForeignKe
 
 
 --
--- TOC entry 2929 (class 2606 OID 24703)
+-- TOC entry 2960 (class 2620 OID 41208)
+-- Name: Puja Mejor_Oferta; Type: TRIGGER; Schema: Subastas; Owner: postgres
+--
+
+CREATE TRIGGER "Mejor_Oferta" BEFORE INSERT ON "Subastas"."Puja" FOR EACH ROW EXECUTE FUNCTION "Subastas"."Update_Nuevo_Precio_Subasta"();
+
+
+--
+-- TOC entry 2953 (class 2606 OID 24703)
 -- Name: Participante FK_Admin; Type: FK CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1389,7 +1807,7 @@ ALTER TABLE ONLY "Subastas"."Participante"
 
 
 --
--- TOC entry 2933 (class 2606 OID 24802)
+-- TOC entry 2957 (class 2606 OID 24802)
 -- Name: Subasta FK_Busqueda; Type: FK CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1398,7 +1816,7 @@ ALTER TABLE ONLY "Subastas"."Subasta"
 
 
 --
--- TOC entry 2931 (class 2606 OID 24784)
+-- TOC entry 2955 (class 2606 OID 24784)
 -- Name: Clasificacion FK_Comprador; Type: FK CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1407,7 +1825,7 @@ ALTER TABLE ONLY "Subastas"."Clasificacion"
 
 
 --
--- TOC entry 2934 (class 2606 OID 24817)
+-- TOC entry 2958 (class 2606 OID 24817)
 -- Name: Puja FK_Comprador; Type: FK CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1416,7 +1834,7 @@ ALTER TABLE ONLY "Subastas"."Puja"
 
 
 --
--- TOC entry 2935 (class 2606 OID 24822)
+-- TOC entry 2959 (class 2606 OID 24822)
 -- Name: Puja FK_Subasta; Type: FK CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1425,7 +1843,7 @@ ALTER TABLE ONLY "Subastas"."Puja"
 
 
 --
--- TOC entry 2930 (class 2606 OID 24779)
+-- TOC entry 2954 (class 2606 OID 24779)
 -- Name: Clasificacion FK_Vendedor; Type: FK CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1434,7 +1852,7 @@ ALTER TABLE ONLY "Subastas"."Clasificacion"
 
 
 --
--- TOC entry 2932 (class 2606 OID 24797)
+-- TOC entry 2956 (class 2606 OID 24797)
 -- Name: Subasta FK_Vendedor; Type: FK CONSTRAINT; Schema: Subastas; Owner: postgres
 --
 
@@ -1442,7 +1860,98 @@ ALTER TABLE ONLY "Subastas"."Subasta"
     ADD CONSTRAINT "FK_Vendedor" FOREIGN KEY ("ForeignKey_Vendedor") REFERENCES "Subastas"."Vendedor"("ID_Participante");
 
 
--- Completed on 2021-04-18 18:31:20
+--
+-- TOC entry 3113 (class 0 OID 0)
+-- Dependencies: 3111
+-- Name: DATABASE "Progra_1"; Type: ACL; Schema: -; Owner: postgres
+--
+
+GRANT ALL ON DATABASE "Progra_1" TO "Alias";
+GRANT ALL ON DATABASE "Progra_1" TO test1;
+GRANT ALL ON DATABASE "Progra_1" TO "New_Alias";
+GRANT ALL ON DATABASE "Progra_1" TO username;
+
+
+--
+-- TOC entry 3115 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: TABLE "Administrador"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT ALL ON TABLE "Subastas"."Administrador" TO "Admin" WITH GRANT OPTION;
+
+
+--
+-- TOC entry 3116 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: TABLE "Busqueda"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT SELECT ON TABLE "Subastas"."Busqueda" TO "User";
+GRANT ALL ON TABLE "Subastas"."Busqueda" TO "Admin" WITH GRANT OPTION;
+
+
+--
+-- TOC entry 3117 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: TABLE "Clasificacion"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE "Subastas"."Clasificacion" TO "User";
+GRANT ALL ON TABLE "Subastas"."Clasificacion" TO "Admin" WITH GRANT OPTION;
+
+
+--
+-- TOC entry 3118 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: TABLE "Participante"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT SELECT ON TABLE "Subastas"."Participante" TO "User";
+GRANT ALL ON TABLE "Subastas"."Participante" TO "Admin" WITH GRANT OPTION;
+
+
+--
+-- TOC entry 3119 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: TABLE "Comprador"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT SELECT ON TABLE "Subastas"."Comprador" TO "User";
+GRANT ALL ON TABLE "Subastas"."Comprador" TO "Admin" WITH GRANT OPTION;
+
+
+--
+-- TOC entry 3120 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: TABLE "Puja"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE "Subastas"."Puja" TO "User";
+GRANT ALL ON TABLE "Subastas"."Puja" TO "Admin" WITH GRANT OPTION;
+
+
+--
+-- TOC entry 3121 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: TABLE "Subasta"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE "Subastas"."Subasta" TO "User";
+GRANT ALL ON TABLE "Subastas"."Subasta" TO "Admin" WITH GRANT OPTION;
+
+
+--
+-- TOC entry 3122 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: TABLE "Vendedor"; Type: ACL; Schema: Subastas; Owner: postgres
+--
+
+GRANT SELECT ON TABLE "Subastas"."Vendedor" TO "Alias";
+GRANT ALL ON TABLE "Subastas"."Vendedor" TO "Admin" WITH GRANT OPTION;
+
+
+-- Completed on 2021-04-21 06:53:00
 
 --
 -- PostgreSQL database dump complete
@@ -1461,7 +1970,7 @@ ALTER TABLE ONLY "Subastas"."Subasta"
 -- Dumped from database version 13.2
 -- Dumped by pg_dump version 13.2
 
--- Started on 2021-04-18 18:31:20
+-- Started on 2021-04-21 06:53:00
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1491,13 +2000,13 @@ CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
 
 
--- Completed on 2021-04-18 18:31:20
+-- Completed on 2021-04-21 06:53:00
 
 --
 -- PostgreSQL database dump complete
 --
 
--- Completed on 2021-04-18 18:31:20
+-- Completed on 2021-04-21 06:53:00
 
 --
 -- PostgreSQL database cluster dump complete
