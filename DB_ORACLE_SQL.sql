@@ -7889,6 +7889,19 @@ SET DEFINE OFF;
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSAUX" ) ;
 --------------------------------------------------------
+--  DDL for Trigger MEJOR_OFERTA
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "SYSTEM"."MEJOR_OFERTA" AFTER INSERT ON Puja
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+    UPDATE Subasta SET PRECIOFINAL = :NEW.OFRECIDO
+    WHERE :NEW.OFRECIDO-PRECIOFINAL > PRECIOFINAL*(PRECIOFINAL/:NEW.OFRECIDO) AND :NEW.FOREIGNKEY_SUBASTA = ID_SUBASTA;
+END;
+/
+ALTER TRIGGER "SYSTEM"."MEJOR_OFERTA" ENABLE;
+--------------------------------------------------------
 --  DDL for Procedure DELETE_ADMINISTRADOR
 --------------------------------------------------------
 set define off;
